@@ -6,30 +6,42 @@ from pytube import Playlist, YouTube
 from youtube_transcript_api import YouTubeTranscriptApi
 
 
-def get_video_transcript(video_id, folder_path):
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-    with open(folder_path + video_id + '_transcript.json', 'w', encoding='utf8') as outfile:
-        json.dump(transcript, outfile, indent=4, ensure_ascii=False)
-    return transcript
+def get_video_transcript(video_id, langcode, folder_path):
+    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
 
-def get_video_info(video_url, video_id):
-    movie = YouTube(video_url)
-    # todo: no date info );
+    for transcript in transcript_list:
+        if langcode in transcript.language_code:
+            our_transcript = transcript
+            break
+        print(transcript.language_code)
+
+    transcript_json_array = our_transcript.fetch()
+    filepath = folder_path + video_id + '_transcript.json'
+    with open(filepath, 'w', encoding='utf8') as outfile:
+        print(f'wrote {filepath}')
+        json.dump(transcript_json_array, outfile, indent=4, ensure_ascii=False)
+    return transcript_json_array
+
+
+def get_video_info(movie: YouTube):
     movie_data = {}
     movie_data['title'] = movie.title
-    movie_data['id'] = video_id
-    movie_data['url'] = video_url
+    movie_data['video_id'] = movie.video_id
+    movie_data['url'] = movie.watch_url
     movie_data['rating'] = movie.rating
     movie_data['views'] = movie.views
     movie_data['description'] = movie.description
+    movie_data['publish_date'] = movie.publish_date
     return movie_data
+
 
 def get_playlist_links(playlist_url):
     playlist = Playlist(playlist_url)
     # get more video details later
-    links = playlist.parse_links()
+    links = playlist.video_urls()
     print('Number of videos in playlist: %s' % len(links))
     return links
+
 
 def get_all_videos_in_channel_from_official_api(channel_id):
     api_key = "AIzaSyDLcXZghtIgi74qyjpEPLnyIvhRsWCKalU"
@@ -65,4 +77,3 @@ def get_all_videos_in_channel_from_official_api(channel_id):
             break
 
     return video_links
-

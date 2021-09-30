@@ -14,7 +14,7 @@ def frequency(text_to_analyse):
     for word in list(cntr):
         if is_crap_word(word):
             del cntr[word]
-    print(cntr.most_common(20))
+    # print(cntr.most_common(20))
     return cntr
 
 

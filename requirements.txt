@@ -2,3 +2,6 @@ certifi
 pytube
 youtube_transcript_api
 pymorphy2
+pymongo
+pymongo[srv]
+dostoevsky

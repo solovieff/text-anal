@@ -44,10 +44,10 @@ def compare_results(name1, name2, results_path='results/'):
 
             compare_two_dicts(dist_result1, dist_result2)
 
+if __name__ == "__main__":
+    cname1 = 'po_faktam_result.json'
+    cname2 = 'soloviev_moskva_kreml_putin_result.json'
+    cname3 = 'soloviev_polniy_kontakt_result.json'
+    cname4 = 'rossiya_budushego_result.json'
 
-cname1 = 'po_faktam_result.json'
-cname2 = 'soloviev_moskva_kreml_putin_result.json'
-cname3 = 'soloviev_polniy_kontakt_result.json'
-cname4 = 'rossiya_budushego_result.json'
-
-compare_results(cname4, cname3)
+    compare_results(cname4, cname3)
