@@ -1,5 +1,3 @@
-import pprint
-from dataclasses import asdict
 from unittest import TestCase
 
 from db import save_video_data
@@ -15,10 +13,8 @@ default_playlists = {
 
 class TestLoad(TestCase):
     def test_process_playlist(self):
-        toned_vides = tone_playlist(default_playlists['galopom_po_evropam_semin'], amount=1)
+        toned_vides = tone_playlist(default_playlists['galopom_po_evropam_semin'])
 
         first_toned = toned_vides[0]
-
-        pprint.pprint(asdict(first_toned))
-
-        save_video_data(first_toned)
+        for toned_video in toned_vides:
+            save_video_data(toned_video)

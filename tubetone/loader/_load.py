@@ -1,34 +1,13 @@
 import ssl
-from dataclasses import dataclass
-from typing import List
 
-from dostoevsky.models import FastTextSocialNetworkModel
-from dostoevsky.tokenization import RegexTokenizer
 from pytube import Playlist, YouTube
 from youtube_transcript_api import TranscriptsDisabled
 
-import constants
-from utils import youtube
-from utils.operations import eyesore
-
-
-@dataclass
-class ToneTube:
-    video_id: str
-    title: str
-    playlist_id: str
-    playlist_name: str
-    url: str
-    views: int
-    description: str
-    publish_date: str
-    author: str
-    transcript: List[dict]
-    full_text: str
-    analysis: dict
-    rating: float
-    keywords: List[str]
-    lang: str
+from tubetone import constants
+from tubetone.analysis import get_tone
+from tubetone.models import ToneTube
+from tubetone.utils import youtube
+from tubetone.utils.operations import eyesore
 
 
 def tone_playlist(playlist_id="PLY8fdk-3N0jC7JM_PCjHqZRTxr8KB41YA", lang='ru', amount=-1):
@@ -40,6 +19,7 @@ def tone_playlist(playlist_id="PLY8fdk-3N0jC7JM_PCjHqZRTxr8KB41YA", lang='ru', a
     :param lang: default loader language
 
     """
+    print(f"loading playlist {playlist_id} data. will process {amount} videos.")
     _free_ssl()
     playlist = Playlist(f'{constants.YOUTUBE_PLAYLIST_PRE_URL}{playlist_id}')
     videos = playlist.videos
@@ -83,7 +63,7 @@ def tone_video(playlist: Playlist, video: YouTube, lang: str = 'ru'):
             if not eyesore(text_chunk['text']):
                 all_text = all_text + " " + text_chunk['text']
         video_data['full_text'] = all_text
-        video_data['analysis'] = _analyse_text(video.title + video.description + all_text)
+        video_data['analysis'] = get_tone(video.title + video.description + all_text)
 
         if playlist is not None:
             video_data['playlist_name'] = playlist.title
@@ -110,21 +90,3 @@ def _free_ssl():
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
     ssl._create_default_https_context = ssl._create_unverified_context
-
-
-def _analyse_text(text: str):
-    tokenizer = RegexTokenizer()
-
-    model = FastTextSocialNetworkModel(tokenizer=tokenizer)
-
-    messages = [
-        text
-    ]
-
-    result = model.predict(messages)[0]
-    keys = ['negative', 'positive', 'neutral']
-    for key in keys:
-        result.setdefault(key, 0)
-
-    result['tone'] = result['positive'] - result['negative']
-    return result

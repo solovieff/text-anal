@@ -3,7 +3,7 @@
 from codecs import open
 from os import path
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 # The directory containing this file
 HERE = path.abspath(path.dirname(__file__))
@@ -33,7 +33,13 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Operating System :: OS Independent"
     ],
-    packages=["tubetone"],
+    packages=find_packages(exclude=("tests",)),
     include_package_data=True,
-    install_requires=["numpy", "pytube", "youtube_transcript_api", "pymorphy2", "pymongo[srv]", "dostoevsky"]
+    install_requires=["numpy", "pytube", "youtube_transcript_api", "pymorphy2", "pymongo[srv]", "dostoevsky"],
+    entry_points={
+        "console_scripts": [
+            "tubetone=tubetone.__main__:main",
+        ]
+    },
+
 )

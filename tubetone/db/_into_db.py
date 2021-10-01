@@ -2,8 +2,8 @@ from dataclasses import asdict
 
 import pymongo
 
-import constants
-from loader import ToneTube
+from .. import constants
+from .. import models
 
 __mongo_client = pymongo.MongoClient(
     constants.DB_URL,
@@ -16,7 +16,7 @@ def clear_playlist_data(playlist_id: str):
     videos_collection.delete_many({"playlist_id": playlist_id})
 
 
-def save_video_data(data: ToneTube):
+def save_video_data(data: models.ToneTube):
     db = __mongo_client.get_database(constants.DB_NAME)
     videos_collection = db[constants.COLLECTION_VIDEOS]
 

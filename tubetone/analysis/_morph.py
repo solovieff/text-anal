@@ -3,10 +3,8 @@ from collections import Counter
 import pymorphy2 as pymorphy2
 
 
-def frequency(text_to_analyse):
+def frequency(text_to_analyse) -> Counter:
     wordlist = text_to_analyse.split()
-
-    morph = pymorphy2.MorphAnalyzer()
 
     normal_form_words = map(to_normal_form, wordlist)
     cntr = Counter(normal_form_words)
@@ -14,7 +12,6 @@ def frequency(text_to_analyse):
     for word in list(cntr):
         if is_crap_word(word):
             del cntr[word]
-    # print(cntr.most_common(20))
     return cntr
 
 
@@ -34,6 +31,7 @@ def is_asciiword(s):
     ascii_word = to_ascii(s)
     return len(ascii_word) > 2
 
+
 def is_too_common_word(s):
     words_to_skip = {'быть', 'этот', 'тот', 'такой', 'какой-то', 'весь', 'который', 'раз'}
     return (s in words_to_skip)
@@ -47,5 +45,6 @@ def is_functor(s):
 def pos(word, morth=pymorphy2.MorphAnalyzer()):
     return morth.parse(word)[0].tag.POS
 
-def to_normal_form(word, morph = pymorphy2.MorphAnalyzer()):
+
+def to_normal_form(word, morph=pymorphy2.MorphAnalyzer()):
     return morph.parse(word)[0].normal_form

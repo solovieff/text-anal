@@ -1,5 +1,4 @@
 import os
-
 # DB
 DB_URL = os.getenv("TUBETONE_DB_URL",
                    "mongodb+srv://aragorn:#aragorn#@cluster0.dlx9j.mongodb.net/tubetune?retryWrites=true&w=majority")
