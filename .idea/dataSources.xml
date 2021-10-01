@@ -4,6 +4,7 @@
     <data-source source="LOCAL" name="tubetune" uuid="01a21402-c6ca-4c6d-894b-667ce7f674ca">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
+      <remarks>main tubetone db</remarks>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
       <jdbc-url>mongodb+srv://cluster0.dlx9j.mongodb.net/tubetune</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
