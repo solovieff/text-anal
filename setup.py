@@ -18,6 +18,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/solovieff/text-anal",
+    download_url="https://github.com/solovieff/text-anal/archive/refs/tags/0.1.2.tar.gz",
     author="Andrey Solovieff",
     author_email="solovieff.nnov@gmail.com",
     license="MIT",
