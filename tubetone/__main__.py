@@ -23,7 +23,7 @@ def main():
         amount = args.amount
         toned_vides = tone_playlist(playlist_id=id, amount=amount)
         for toned_video in toned_vides:
-            if args.db_url:
+            if args.save_todb:
                 save_video_data(toned_video)
             else:
                 toned_video.view_main()
