@@ -14,7 +14,7 @@ default_playlists = {
 
 class TestLoad(TestCase):
     def test_process_playlist(self):
-        toned_vides = tone_playlist(default_playlists['galopom_po_evropam_semin'], amount=1)
+        toned_vides = tone_playlist(default_playlists['goblin_news'], amount=-1)
 
         first_toned = toned_vides[0]
         for toned_video in toned_vides:
