@@ -1,4 +1,7 @@
+import pprint
 from unittest import TestCase
+
+from tubetone.db import get_playlist_videos_for_analysis, get_playlist_tones
 
 default_playlists = {
     "galopom_po_evropam_semin": "PLrULWNBdKzUiC95qca-DVXBIQaEofNtll",
@@ -10,5 +13,11 @@ default_playlists = {
 
 
 class TestLoad(TestCase):
-    def test_process_playlist(self):
-        vids = get_playlist_videos
+    def test_load_vids(self):
+        vids = get_playlist_videos_for_analysis(default_playlists["galopom_po_evropam_semin"])
+        pprint.pprint(vids)
+
+    def test_load_infos(self):
+        vids = get_playlist_tones(default_playlists["galopom_po_evropam_semin"])
+
+        pprint.pprint(vids)

@@ -5,3 +5,5 @@ pymorphy2
 pymongo
 pymongo[srv]
 dostoevsky
+pandas
+matplotlib
