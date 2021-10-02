@@ -1,7 +1,7 @@
 # __main__.py
 
-from .db import save_video_data
-from .loader import tone_playlist
+from tubetone.db import save_video_data
+from tubetone.loader import tone_playlist
 
 
 def main():

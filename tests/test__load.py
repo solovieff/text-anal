@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from db import save_video_data
+from tubetone.db import save_video_data
 from tubetone.loader import tone_playlist
 
 default_playlists = {
@@ -13,7 +13,7 @@ default_playlists = {
 
 class TestLoad(TestCase):
     def test_process_playlist(self):
-        toned_vides = tone_playlist(default_playlists['galopom_po_evropam_semin'])
+        toned_vides = tone_playlist(default_playlists['galopom_po_evropam_semin'], amount=1)
 
         first_toned = toned_vides[0]
         for toned_video in toned_vides:

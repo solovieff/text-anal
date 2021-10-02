@@ -1,9 +1,8 @@
 from dataclasses import asdict
 
 import pymongo
-
-from .. import constants
-from .. import models
+from tubetone import constants
+from tubetone import models
 
 __mongo_client = pymongo.MongoClient(
     constants.DB_URL,
