@@ -30,7 +30,8 @@ def tone_playlist(playlist_id="PLY8fdk-3N0jC7JM_PCjHqZRTxr8KB41YA", lang='ru', a
     toned_videos = []
     for video in videos:
         toned_video = tone_video(playlist, video, lang=lang)
-        toned_videos.append(toned_video)
+        if toned_video:
+            toned_videos.append(toned_video)
 
     return toned_videos
 
