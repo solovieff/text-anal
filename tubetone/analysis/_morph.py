@@ -24,7 +24,7 @@ def to_ascii(s):
 
 
 def is_crap_word(s):
-    return (is_functor(s) or is_too_common_word(s))
+    return is_functor(s) or is_too_common_word(s)
 
 
 def is_asciiword(s):
@@ -34,12 +34,17 @@ def is_asciiword(s):
 
 def is_too_common_word(s):
     words_to_skip = {'быть', 'этот', 'тот', 'такой', 'какой-то', 'весь', 'который', 'раз'}
-    return (s in words_to_skip)
+    return s in words_to_skip
+
+
+def is_symbol(s):
+    symbols = {'[', ']', ')', '(', '__', '_', '-'}
+    return s in symbols
 
 
 def is_functor(s):
     functors_pos = {'INTJ', 'PRCL', 'CONJ', 'PREP', 'NPRO', 'ADVB'}
-    return (pos(s) in functors_pos)
+    return pos(s) in functors_pos
 
 
 def pos(word, morth=pymorphy2.MorphAnalyzer()):

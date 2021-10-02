@@ -4,7 +4,7 @@ from pytube import Playlist, YouTube
 from youtube_transcript_api import TranscriptsDisabled
 
 from tubetone import constants
-from tubetone.analysis import get_tone
+from tubetone.analysis import get_tone, frequency
 from tubetone.models import ToneTube
 from tubetone.utils import youtube
 from tubetone.utils.operations import eyesore
@@ -64,7 +64,10 @@ def tone_video(playlist: Playlist, video: YouTube, lang: str = 'ru'):
             if not eyesore(text_chunk['text']):
                 all_text = all_text + " " + text_chunk['text']
         video_data['full_text'] = all_text
-        video_data['analysis'] = get_tone(video.title + video.description + all_text)
+        tone_analysis = get_tone(video.title + all_text)
+        morph_analysis = frequency(all_text).most_common(20)
+        video_data['tone_analysis'] = tone_analysis
+        video_data['morph_analysis'] = dict(morph_analysis)
 
         if playlist is not None:
             video_data['playlist_name'] = playlist.title

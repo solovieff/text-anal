@@ -16,7 +16,8 @@ class ToneTube:
     author: str
     transcript: List[dict]
     full_text: str
-    analysis: dict
+    tone_analysis: dict
+    morph_analysis: dict
     rating: float
     keywords: List[str]
     lang: str
