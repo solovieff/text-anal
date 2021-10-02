@@ -14,12 +14,12 @@ def get_playlist_tones(playlist_id: str) -> List[dict]:
     db = __mongo_client.get_database(constants.DB_NAME)
     videos_collection = db[constants.COLLECTION_VIDEOS]
 
-    projection = {"video_id": 1, "playlist_id": 1, "publish_date": 1, "tone_analysis.tone": 1}
+    projection = {"tone": "$tone_analysis.tone", "publish_date": "$publish_date", "playlist_id": "$playlist_id",
+                  "video_id": "$video_id", "views": "$views", "duration": "$duration"}
 
     vids = videos_collection.aggregate([{"$match": {
         "playlist_id": playlist_id
-    }}, {"$project": {"tone": "$tone_analysis.tone", "publish_date": "$publish_date", "playlist_id": "$playlist_id",
-                      "video_id": "$video_id"}}, {"$sort": {"publish_date": 1}}])
+    }}, {"$project": projection}, {"$sort": {"publish_date": 1}}])
 
     return list(vids)
 

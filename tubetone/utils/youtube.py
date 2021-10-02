@@ -4,13 +4,14 @@ from youtube_transcript_api import YouTubeTranscriptApi
 
 def get_video_transcript(video_id, langcode):
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-
+    our_transcript = None
     for transcript in transcript_list:
         if langcode in transcript.language_code:
             our_transcript = transcript
             break
         print(transcript.language_code)
-
+    if not our_transcript:
+        return []
     transcript_json_array = our_transcript.fetch()
     return transcript_json_array
 
@@ -25,6 +26,7 @@ def get_video_info(movie: YouTube):
         'description': movie.description.replace('\n', ''),
         'publish_date': movie.publish_date,
         'author': movie.author,
-        'keywords': movie.keywords
+        'keywords': movie.keywords,
+        'duration_sec': movie.length
     }
     return movie_data

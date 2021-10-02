@@ -48,6 +48,7 @@ class AnalysisToneTube:
 @dataclass
 class ToneTube(AnalysisToneTube):
     description: str
+    duration_sec: int
     url: str
     playlist_name: str
     transcript: List[dict]
