@@ -13,12 +13,12 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 # This call to setup() does all the work
 setup(
     name="tubetone",
-    version="0.3.2",
+    version="0.3.3",
     description="Library to process youtube videos texts and analyze results.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/solovieff/text-anal",
-    download_url="https://github.com/solovieff/text-anal/archive/refs/tags/0.3.2.tar.gz",
+    download_url="https://github.com/solovieff/text-anal/archive/refs/tags/0.3.3.tar.gz",
     author="Andrey Solovieff",
     author_email="solovieff.nnov@gmail.com",
     license="MIT",

@@ -15,15 +15,16 @@ def main():
                         help='how many of the latest video to parse', default=5)
 
     parser.add_argument('--save_todb', metavar='save_todb', required=False,
-                        help='if to save to db: will save to db from env', default=None)
+                        help='if to save to db: will save to db from env', default="no")
     args = parser.parse_args()
 
     id = args.id
     if args.type == 'playlist':
-        amount = args.amount
+        amount = int(args.amount)
         toned_vides = tone_playlist(playlist_id=id, amount=amount)
         for toned_video in toned_vides:
-            if args.save_todb:
+            save = args.save_todb.lower() in ['true', '1', 't', 'y', 'yes']
+            if save:
                 save_video_data(toned_video)
             else:
                 toned_video.view_main()
