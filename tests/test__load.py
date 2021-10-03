@@ -13,6 +13,8 @@ default_playlists = {
     "minaev_news_rus": "PLosWRcTJZf2qFwMeDb2doe2u5TQTESxOs",
     "interview_rbk": "PL8KkwRBLSol3E-BXr0fNdcU4oddkGgHkj",
     "ipo_review": "PLagcXWyrpiY6PUPlI-gx7w1uto_cXbzCI",
+    "svetov_peredachi": "PLs_UHPP0bWJSIdQIXrXScsJ9bcxdVP716",
+    "finansi_investicii": "PLjh-iJP12ptuMW4Y5ap5jrup5Fgg6KYhd",
 }
 
 
